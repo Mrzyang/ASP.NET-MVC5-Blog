@@ -1,0 +1,153 @@
+造型:  @model IEnumerable<MyBlog.Models.cate>
+ window.setTimeout("window.location.href='Info'", 1000);  js延时跳转
+
+ 相对于项目根目录；<a href="~/Article/addArticle" target="_blank">
+ueditor:
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval", "~/Content/ueditor/ueditor.config.js", "~/Content/ueditor/ueditor.all.js")
+
+<script type="text/javascript">
+    var editor = new baidu.editor.ui.Editor({
+        UEDITOR_HOME_URL: '/Content/ueditor/',
+        iframeCssUrl: '/Content/ueditor/themes/iframe.css',
+        autoHeightEnabled: true,
+        initialFrameHeight: 400
+    });
+    editor.render('Content');
+</script>
+}
+
+
+
+二、当前controller、action的获取
+RouteData.Route.GetRouteData(this.HttpContext).Values["controller"]
+RouteData.Route.GetRouteData(this.HttpContext).Values["action"]
+或
+RouteData.Values["controller"]
+RouteData.Values["action"]
+
+如果在视图中可以用
+ViewContext.RouteData.Route.GetRouteData(this.Context).Values["controller"]
+ViewContext.RouteData.Route.GetRouteData(this.Context).Values["action"]
+或
+ViewContext.RouteData.Values["controller"]
+ViewContext.RouteData.Values["action"]
+
+控制器:                                       
+     1.Admin  --用户登录，注销登录
+
+     2.Article
+
+
+
+
+
+数据表
+     1. article  文章表
+     2. cate     分类表
+     3.link      友情链接表  
+     4.admin     管理员表
+
+
+弹层代码：
+
+<script>
+    function addLayer() {
+        layer.open({
+            type: 2,
+            title: '新增分类',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area: ['550px', '400px'],
+            content: 'addCate'
+        });
+    }
+
+</script>
+
+
+
+
+
+bootstrap代码：
+
+    <script src="~/Assets/BackEnd/js/jquery-3.2.1.js"></script>
+    <link href="~/Assets/BackEnd/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Assets/BackEnd/js/bootstrap.min.js"></script>
+
+
+
+
+ajax提交代码:                                                        //切记把表单中的<button type="button"> </button>  这个问题都折腾我一天了
+<script>
+        $(document).ready(function () {
+            $("#btnAdd").click(function () {
+                if (!$('#cateName').val()) {
+                    alert("请输入分类名称！");
+                } else {
+                    $.ajax({
+                        type: "post",
+                        url: "ProcessAdd",
+                        data: $("#form-cate-add").serialize(),
+                        dataType: "json",
+                        success: function (msg) {
+                            if (msg == 1) {
+                               window.parent.location.reload();
+                               var index = parent.layer.getFrameIndex(window.name);
+                               parent.layer.close(index);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+</script>
+
+控制器处理代码：
+
+        public JsonResult ProcessAdd(string cateName)
+        {
+            cate mycate = new cate();
+            var result = from c in dbContext.cate
+                         where c.catname == cateName
+                         select c;
+            if (result.Count() > 0) return Json(new { status = 0, data = "该分类已存在,请重新输入！" });
+            else
+            {
+                mycate.catname = cateName;
+                dbContext.cate.Add(mycate);
+                if (dbContext.SaveChanges() != 0)
+                    return Json(new { status = 1, data = "添加成功" });
+                else return Json(new { status = 0, data = "添加失败" });
+            }
+
+        }
+
+//删除代码 jquery的get请求
+ function cate_del(id,obj) {
+        layer.confirm('确认要删除吗？', function (index) {
+            //此处请求后台程序，下方是成功后的前台处理……
+            $.get("Cate/processDelete", { id: id })
+
+            $(obj).parents("tr").remove();
+            layer.msg('已删除!', { icon: 1, time: 1000 });
+        });
+    }
+
+全选checkbox的jq代码
+
+    $('.allChoose').on('change', function () {
+        if ($(this).is(':checked')) {
+            $('.singleChoose').prop('checked', 'checked');
+        } else {
+            $('.singleChoose').prop('checked','');
+        }
+    })
+
+
+
+
+
+
+
