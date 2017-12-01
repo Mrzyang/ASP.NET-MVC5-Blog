@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Views/Shared/_LayoutBack.cshtml";
+}
+<div class="crumb-wrap">
+    <div class="crumb-list"><i class="icon-font">&#xe06b;</i><span style="color: red">ASP.NET MVC个人博客</span></div>
+</div>
+<div class="result-wrap">
+    <div class="result-title">
+        <h1>快捷操作</h1>
+    </div>
+    <div class="result-content">
+        <div class="short-wrap">
+            <a href="~/Article/addArticle" target="_blank"><i class="icon-font">&#xe005;</i>新增博文</a>
+            <a onclick="addCateLayer()"><i class="icon-font">&#xe041;</i>新增博客分类</a>
+        </div>
+    </div>
+</div>
+<div class="result-wrap">
+    <div class="result-title">
+        <h1>系统基本信息</h1>
+    </div>
+    <div class="result-content">
+        <ul class="sys-info-list">
+            <li>
+                <label class="res-lab">操作系统</label><span class="res-info">@ViewBag.System</span>
+            </li>
+            <li>
+                <label class="res-lab">IIS版本</label><span class="res-info">@ViewBag.serverIIS</span>
+            </li>
+            <li>
+                <label class="res-lab">.NET版本</label><span class="res-info">@ViewBag.NETVersion</span>
+            </li>
+            <li>
+                <label class="res-lab">北京时间</label><span class="res-info">@ViewBag.serverDate</span>
+            </li>
+            <li>
+                <label class="res-lab">服务器域名/IP</label><span class="res-info">@ViewBag.serverDoname</span>
+            </li>
+            <li>
+                <label class="res-lab">Host</label><span class="res-info">@ViewBag.serverIP</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="result-wrap">
+    <div class="result-title">
+        <h1>使用帮助</h1>
+    </div>
+    <div class="result-content">
+        <ul class="sys-info-list">
+            <li>
+                <label class="res-lab">作者QQ：</label><span class="res-info">846965599</span>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<p id="addCateUrl" hidden>
+    @Href("~/Cate/AddCate")
+</p>
+<script>
+    function addCateLayer() {
+        layer.open({
+            type: 2,
+            title: '新增分类',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area: ['550px', '400px'],
+            content: $("#addCateUrl").text()
+        });
+    }
+</script>
+

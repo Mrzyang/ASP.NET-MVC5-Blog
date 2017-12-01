@@ -1,0 +1,9 @@
+﻿@model IEnumerable<MyBlog.Models.cate>
+
+    @foreach (var c in Model)
+    {
+        <li id="menu-item-180" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-180">
+            @Html.ActionLink(c.catname, "ArticlesOfCate", "Home", new { id =c.id }, new {})
+        </li>
+    }
+

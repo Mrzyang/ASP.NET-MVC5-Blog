@@ -1,0 +1,35 @@
+﻿@model PagedList.IPagedList<MyBlog.Models.article>
+@using PagedList.Mvc;
+@{ 
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+    ViewBag.Title = ViewBag.atitle;
+    var i = 1;
+}
+<ul class="excerpt thumb">
+    <!--遍历输出数据库所有的文章并且分页-->
+    
+    @foreach (var a in Model)
+    {
+        var imgsrc = i + ".jpg";
+        <li>
+            <a href="~/Article/Detail?id=@a.id" class="pic">
+                <img src="~/Assets/FrontEnd/images/@imgsrc"
+                     alt="@a.title" />
+            </a>
+            <h2 class="excerpt-tit">
+                <a href="~/Article/Detail?id=@a.id">@a.title</a>
+            </h2>
+            <p class="excerpt-desc" id="a-desc">
+                @a.desc
+            </p>
+            <div class="excerpt-time">
+                 @a.time
+            </div>
+        </li>
+        i++;
+    }
+</ul>
+<div class="paging" style="position:relative;left:-270px">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyBlogModelStoreContainer" CdmEntityContainer="MyBlogEntities">
+    <EntitySetMapping Name="admin">
+      <EntityTypeMapping TypeName="MyBlogModel.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="article">
+      <EntityTypeMapping TypeName="MyBlogModel.article">
+        <MappingFragment StoreEntitySet="article">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="desc" ColumnName="desc" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="cateid" ColumnName="cateid" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="creator" ColumnName="creator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cate">
+      <EntityTypeMapping TypeName="MyBlogModel.cate">
+        <MappingFragment StoreEntitySet="cate">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="catname" ColumnName="catname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="link">
+      <EntityTypeMapping TypeName="MyBlogModel.link">
+        <MappingFragment StoreEntitySet="link">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="desc" ColumnName="desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,110 @@
+﻿@model PagedList.IPagedList<MyBlog.Models.link>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBack.cshtml";
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<div class="crumb-wrap">
+    <div class="crumb-list"><i class="icon-font"></i><a href="/Admin/Info">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">链接管理</span></div>
+</div>
+
+<div class="result-wrap">
+    <form name="myform" id="myform" method="post">
+        <div class="result-title">
+            <div class="result-list">
+                <a onclick="addLayer()"><i class="icon-font"></i>新增链接</a>
+                <a id="batchDel" href="javascript:void(0)" onclick="manyLinks_del()"><i class="icon-font"></i>批量删除</a>
+            </div>
+        </div>
+        <div class="result-content">
+            <table class="result-tab" width="100%">
+                <tr>
+                    <th class="tc" width="5%"><input class="allChoose" name="" type="checkbox"></th>
+                    <th>ID</th>
+                    <th>链接名</th>
+                    <th>URL</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+              @foreach (var l in Model)
+              {
+                <tr>
+                    <td class="tc"><input name="id[]" value="@l.id" type="checkbox" class="singleChoose"></td>
+                    <td>@l.id</td>
+                    <td>@l.title</td>
+                    <td>@l.url</td>
+                    <td>@l.desc</td>
+                    <td>
+                        <a class="link-update" onclick="updateLayer(@l.id)">修改</a>
+                        <a class="link-del" href="#" onclick="link_del(@l.id,this)">删除</a>
+                    </td>
+                </tr>
+              }
+               
+            </table>
+            <div class="list-page">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function addLayer() {
+        layer.open({
+            type: 2,
+            title: '新增友情链接',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area: ['510px', '460px'],
+            content: 'Link/AddLink'
+        });
+    }
+
+    function updateLayer(id) {
+        layer.open({
+            type: 2,
+            title: '修改友情链接',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area: ['510px', '460px'],
+            content: 'Link/UpdateLink?id=' + id
+        });
+    }
+
+    function link_del(id, obj) {
+        layer.confirm('确认要删除吗？', function (index) {
+            //此处请求后台程序，下方是成功后的前台处理……
+            $.get("Link/processDelete", { id: id })
+
+            $(obj).parents("tr").remove();
+            layer.msg('已删除!', { icon: 1, time: 1000 });
+        });
+    }
+
+    function manyLinks_del() {
+        var idStr = '';
+        $(".singleChoose").each(function () {
+            if ($(this)[0].checked) {
+                idStr += $(this).val() + ',';
+            }
+        });
+        if (!idStr) { alert('请至少勾选一个！'); return }
+        layer.confirm('确认要删除吗？', function (index) {
+            $.get("Link/ManyDelete", { idStr: idStr })
+            layer.msg('已删除!', { icon: 1, time: 1000 });
+            window.location.reload();
+        });
+    }
+
+
+    //checkbox的全选与取消全选
+    $('.allChoose').on('change', function () {
+        if ($(this).is(':checked')) {
+            $('.singleChoose').prop('checked', 'checked');
+        } else {
+            $('.singleChoose').prop('checked', '');
+        }
+    })
+</script>

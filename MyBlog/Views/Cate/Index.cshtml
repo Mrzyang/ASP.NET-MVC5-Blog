@@ -1,0 +1,107 @@
+﻿@model PagedList.IPagedList<MyBlog.Models.cate>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBack.cshtml";
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<div class="crumb-wrap">
+    <div class="crumb-list"><i class="icon-font"></i><a href="/Admin/Info">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">分类管理</span></div>
+</div>
+
+<div class="result-wrap">
+    <form name="myform" id="myform" method="post">
+        <div class="result-title">
+            <div class="result-list">
+                <a onclick="addLayer()"><i class="icon-font"></i>新增分类</a>
+                <a id="batchDel" href="javascript:void(0)" onclick="manyCates_del()"><i class="icon-font"></i>批量删除</a>
+            </div>
+        </div>
+        <div class="result-content">
+            <table class="result-tab" width="100%">
+                <tr>
+                    <th class="tc" width="5%"><input class="allChoose" name="" type="checkbox"></th>
+                    <th>ID</th>
+                    <th>分类名</th>
+                    <th>操作</th>
+                </tr>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td class="tc"><input name="id[]" value="@c.id" type="checkbox" class="singleChoose"></td>
+                        <td>@c.id</td>
+                        <td>@c.catname</td>
+                        <td>
+                            <a class="link-update" onclick="updateLayer(@c.id)">修改</a>
+                            <a class="link-del" href="#" onclick="cate_del(@c.id,this)">删除</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            <div class="list-page">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function addLayer() {
+        layer.open({
+            type: 2,
+            title: '新增分类',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area: ['550px', '400px'],
+            content: 'Cate/AddCate'
+        });
+    }
+
+    function updateLayer(id) {
+        layer.open({
+            type: 2,
+            title: '修改分类',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area: ['550px', '400px'],
+            content: 'Cate/UpdateCate?id=' + id
+        });
+    }
+
+    function cate_del(id, obj) {
+        layer.confirm('确认要删除吗？', function (index) {
+            //此处请求后台程序，下方是成功后的前台处理……
+            $.get("Cate/processDelete", { id: id })
+
+            $(obj).parents("tr").remove();
+            layer.msg('已删除!', { icon: 1, time: 1000 });
+        });
+    }
+
+    function manyCates_del() {
+        var idStr = '';
+        $(".singleChoose").each(function () {
+            if ($(this)[0].checked) {
+                idStr += $(this).val() + ',';
+            }
+        });
+        if (!idStr) { alert('请至少勾选一个！'); return }
+        layer.confirm('确认要删除吗？', function (index) {
+            $.get("Cate/ManyDelete", { idStr: idStr })
+            layer.msg('已删除!', { icon: 1, time: 1000 });
+            window.location.reload();
+        });
+    }
+
+
+    //checkbox的全选与取消全选
+    $('.allChoose').on('change', function () {
+        if ($(this).is(':checked')) {
+            $('.singleChoose').prop('checked', 'checked');
+        } else {
+            $('.singleChoose').prop('checked', '');
+        }
+    })
+</script>

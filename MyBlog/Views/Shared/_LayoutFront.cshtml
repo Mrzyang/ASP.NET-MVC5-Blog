@@ -1,0 +1,113 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="applicable-device" content="pc">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Assets/FrontEnd/css/style.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/Assets/FrontEnd/images/LOGO.jpg" />
+    <script src="~/Assets/BackEnd/js/jquery-3.2.1.js"></script>
+    <script src="~/Content/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+    <link href="~/Content/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <script src="~/Assets/BackEnd/js/layer.js"></script>
+    <link href="~/Assets/BackEnd/css/layer.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+    <style type="text/css">
+        img.wp-smiley,
+        img.emoji {
+            display: inline !important;
+            border: none !important;
+            box-shadow: none !important;
+            height: 1em !important;
+            width: 1em !important;
+            margin: 0 .07em !important;
+            vertical-align: -0.1em !important;
+            background: none !important;
+            padding: 0 !important;
+        }
+        #ContactMe a{
+            display:inline-block;
+            padding-left: 10px
+        }
+    </style>
+    <script type="text/javascript">
+        if (top.location != self.location) {
+            top.location = self.location
+        } </script>
+</head>
+<body class="home blog">
+    <div class="img" style="margin:0;padding:0">
+        <img src="~/Assets/FrontEnd/images/tooopen.jpg" height="300" width="100%"> 
+    </div>
+
+    <div class="topbar">
+        <div class="inner">
+            <ul class="nav">
+                <li id="menu-item-180" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-180">
+                    @Html.ActionLink("首页", "Index", "Home")
+                </li>
+                    @Html.Action("showCates", "Home")
+            </ul>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="content">
+            @RenderBody()
+        </div>
+        <div class="sidebar">
+            <img src="~/Assets/FrontEnd/images/56.jpg" height="150" width="300">
+            <div class="widget widget_links">
+                <h3 class="widget-tit">音乐盒</h3>
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=110 src="//music.163.com/outchain/player?type=0&id=732170431&auto=1&height=90"></iframe>
+            </div>
+            <div class="widget widget_recent_entries">
+                <h3 class="widget-tit">最新发表</h3>
+                <ul style="font-size:14px;font-family:楷体">
+                    @Html.Action("showLastest","Home")
+                </ul>
+            </div>
+            <div class="widget widget_links">
+                <h3 class="widget-tit">友情链接</h3>
+                <ul class='xoxo blogroll' style="font-family: FangSong">
+                    @Html.Action("showLinks", "Home")
+                </ul>
+            </div>
+
+ 
+        </div>
+    </div>
+    <div id="bottom">
+        <div style="color:white;text-align:center;padding-top:15px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+            <p id="ContactMe">
+                <a onclick="qq()"><i class="fa fa-qq" style="color:azure;font-size:24px"></i></a>
+                <a onclick="weixin()" ><i class="fa fa-weixin" style="color:azure;font-size:24px"></i></a>
+                <a target="_blank" rel="nofollow" href="https://github.com/Mrzyang"><i class="fa fa-github" style="color:azure;font-size:24px"></i></a>
+                <a target="_blank" rel="nofollow" href="tel:17671751371"><i class="fa fa-phone" style="color:azure;font-size:24px"></i></a>
+            </p>
+            <br />
+            <p>COPYRIGHT 2017 ASP.NET BLOG. ALL RIGHTS RESERVED.</p>
+            <p>鄂ICP备17001359号</p>
+        </div>
+    </div>
+    <script type='text/javascript' src='http://yispace.net/wp-includes/js/wp-embed.min.js?ver=4.5.2'></script>
+    <script>
+        function qq() {
+		window.location.href = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ? "mqqwpa://im/chat?chat_type=wpa&uin=846965599&version=1&src_type=web&web_src=oicqzone.com" :  "tencent://message/?uin=846965599&Site=在线QQ&amp;Menu=yes";
+        }
+        function weixin() {
+            layer.open({
+                type: 2,
+                title: '加我微信',
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭层
+                area: ['455px', '490px'],
+                content: 'http://520jzz.top/weixin.html'
+            });
+        }
+    </script>
+</body>
+</html>

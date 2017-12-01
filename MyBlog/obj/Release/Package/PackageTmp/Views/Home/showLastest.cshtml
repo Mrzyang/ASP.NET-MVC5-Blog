@@ -1,0 +1,7 @@
+﻿@model IEnumerable<MyBlog.Models.article>
+@foreach (var a in Model)
+{
+<li>
+<a href="~/Article/Detail?id=@a.id" target="_blank"> @a.title </a>
+</li>
+}

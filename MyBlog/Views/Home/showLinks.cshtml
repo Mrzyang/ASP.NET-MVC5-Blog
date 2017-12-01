@@ -1,0 +1,5 @@
+﻿@model IEnumerable < MyBlog.Models.link>
+@foreach (var l in Model)
+{
+    <li><a href="@l.url" rel="friend" target="_blank">@l.title</a></li>
+}

@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+    ViewBag.Title = ViewBag.atitle;
+}
+<div class="meta">
+    <h1 class="meta-tit">@ViewBag.atitle</h1>
+    <p class="meta-info">发表：<a href="http://yispace.net/">ASP.NET mvc5 blog</a> &nbsp;&nbsp; 发表日期：@ViewBag.creatTime &nbsp;&nbsp; </p>
+</div>
+
+<!-- 广告代码2 -->
+
+<div class="entry">
+    <p style="text-align:center">
+        作者：@ViewBag.author<br />
+    </p>
+    <div style="padding:0px;margin:0px">
+        @Html.Raw(ViewBag.content)    
+        <p style="font-family:楷体">   文章版权属于文章作者所有，转载请注明：</p>
+    </div>
+</div>
+
+<!-- 代码1：放在页面需要展示的位置  -->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div id="cyReward" role="cylabs" data-use="reward" style="height:50px;width:100px;margin: 0 auto"></div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytjXxh5l"></script>
+
+<br><br>
+
+<!-- 喜欢(点赞)按钮JiaThis Button BEGIN -->
+<div class="jiathis_style" style="position:relative;top:10px">
+    <a class="jiathis_like_tsina"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!--  百度分享 BEGIN -->
+<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "24" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- 百度分享 END -->
+<br />
+
+<!--评论插件-->
+<div id="SOHUCS"></div>
+<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: 'cytjXxh5l',
+        conf: 'prod_214910d22201a29b01f22aa08e74cc79'
+    });
+</script>
+
+<!--end--评论插件-->
+<div style="margin-left: -12px; margin-bottom: -3px;">
+    <script>document.write(unescape('%3Cdiv id="hm_t_61751"%3E%3C/div%3E%3Cscript charset="utf-8" src="http://crs.baidu.com/t.js?siteId=99c2c06a529fc4c8787deb597141fe76&planId=61751&async=0&referer=') + encodeURIComponent(document.referrer) + '&title=' + encodeURIComponent(document.title) + '&rnd=' + (+new Date) + unescape('"%3E%3C/script%3E'));</script>
+</div>
+<script>
+    SyntaxHighlighter.all();
+</script>
+
+
