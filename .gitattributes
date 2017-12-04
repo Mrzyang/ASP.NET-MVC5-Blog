@@ -1,0 +1,3 @@
+    *.js linguist-language=ASP.NET  
+    *.css linguist-language=ASP.NET 
+    *.html linguist-language=ASP.NET 
